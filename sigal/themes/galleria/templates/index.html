@@ -63,7 +63,7 @@
   <body>
     <div class="container">
       <header>
-        <h1><a href="{{ album.index_url }}">{{ index_title }}</a></h1>
+        <h1><a href="{{ album.index_url }}">{{ index_title | safe }}</a></h1>
 
         {% if settings.links %}
         <nav id="menu">
@@ -104,7 +104,7 @@
         {% if album.medias %}
           {% macro img_description(media) -%}
             {%- if media.big %}<a href='{{ media.big }}'>Full size</a>{% endif %}
-            {% if media.description %}<br>{{ media.description }}{% endif %}
+            {% if media.description %}<br>{{ media.description | safe }}{% endif %}
 
             {%- if media.exif %}
               <br>
@@ -137,7 +137,7 @@
               <a href="{{ media.filename }}">
                 <img src="{{ media.thumbnail }}" alt="{{ media.filename }}"
                     data-title="{{ media.title if media.title else media.filename }}"
-                    data-description="{{ img_description(media) }}"
+                    data-description="{{ img_description(media) | forceescape }}"
                     {% if media.big %} data-big="{{ media.big }}"{% endif %} />
               </a>
             {% endif %}
@@ -145,7 +145,7 @@
               <a href="{{ theme.url }}/img/empty.png">
                 <img src="{{ media.thumbnail }}" alt="{{ media.filename }}"
                     data-title="{{ media.title if media.title else media.filename }}"
-                    data-description="{{ img_description(media) }}"
+                    data-description="{{ img_description(media) | forceescape }}"
                     data-layer="<video controls>
                                   <source src='{{ media.filename }}' type='video/webm' />
                                 </video>" />
@@ -166,7 +166,7 @@
 
         {% if album.description %}
         <div id="description">
-          {{ album.description }}
+          {{ album.description | safe }}
         </div>
         {% endif %}
       </div>

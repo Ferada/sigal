@@ -102,7 +102,7 @@
 
   {% if album.description %}
   <div id="description" class="row">
-    {{ album.description }}
+    {{ album.description | safe }}
   </div>
   {% endif %}
 {% endblock %}
