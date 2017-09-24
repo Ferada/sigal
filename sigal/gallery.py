@@ -69,7 +69,8 @@ class Media(UnicodeMixin):
     extensions = ()
 
     def __init__(self, filename, path, settings):
-        self.src_filename = self.filename = self.url = filename
+        self.src_filename = self.filename = filename
+        self.url = url_quote(filename)
         self.path = path
         self.settings = settings
         self.ext = os.path.splitext(filename)[1].lower()
